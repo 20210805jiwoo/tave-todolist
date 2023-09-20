@@ -1,13 +1,67 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.page {
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    max-width: 400px;
+    padding: 0 20px;
+    margin-top: 10%;
+    border-radius: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #e3e3e3;
+    display: flex;
+    flex-direction: column;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.title {
+    margin-top: 50px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.content {
+    margin-top: 30px;
+    flex: 1;
+}
+
+.inputTitle {
+    font-size: 15px;
+    margin-top: 25px;
+}
+
+.inputWrap {
+    display: flex;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #fff;
+    background-color: #fff;
+}
+.inputWrap:focus-within {
+    border: 1px solid rgb(14, 45, 103);
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    border: none;
+    height: 17px;
+    font-size: 14px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 11px;
+    margin-top:10px;
+}
+
+.bottomButton {
+    width: 100%;
+	height: 48px;
+    border: none;
+    border-radius: 64px;
+    background-color: rgb(14, 45, 103);
+    color: white;
+    margin-top: 28%;
+    cursor: pointer;
 }
