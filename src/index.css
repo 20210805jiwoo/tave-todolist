@@ -25,17 +25,17 @@
     flex: 1;
 }
 
-.inputTitle {
+/* .inputTitle {
     font-size: 15px;
     margin-top: 25px;
     color: #0e2d67;
-}
+} */
 
 .inputWrap {
     display: flex;
     border-radius: 8px;
     padding: 12px;
-    margin-top: 10px;
+    margin-top: 35px;
     border: 1px solid #fff;
     background-color: #fff;
 }
@@ -64,10 +64,18 @@
     border-radius: 64px;
     background-color: rgb(14, 45, 103);
     color: white;
-    margin-top: 10%;
+    font-weight: 600;
+    margin-top: 12%;
     cursor: pointer;
+    font-size: 15px;
 }
 
+.note {
+    position: absolute;
+    width: 49px;
+    height: 49px;
+    margin-left: 14px;
+}
 .option {
     display: flex;
     align-items: center;
@@ -76,18 +84,35 @@
     margin-left: 15%;
 }
 
+.accountbutton{
+    display: flex;
+    justify-content: center;
+    border:none;
+    background-color: #d5e4ed;
+    color: #96979C;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    margin-top: 15px;
+    margin-bottom:auto;
+    margin-left: 3px;
+}
+
 .hr-sen {
     display: flex; 
     flex-basis: 100%; 
     align-items: center; 
     font-size: 12px; 
     margin: 38px 10px;
+    color: #96979C;
+    font-weight: 700;
 }
 
 .hr-sen::before, .hr-sen::after {
     content: ""; 
     flex-grow: 1; 
-    background: rgba(0, 0, 0, 0.35); 
+    /* background: rgba(0, 0, 0, 0.35);  */
+    background: #96979C;
     height: 1px; 
     font-size: 0px; 
     line-height: 0px; 
@@ -103,8 +128,8 @@
 .naver {
     border-radius: 100%;
     border: none;
-    width: 41px;
-    height: 41px;
+    width: 39px;
+    height: 39px;
     background-color: #1DC800;
     margin-left: 10px;
     color: #fff;
@@ -113,8 +138,8 @@
 .kakao {
     border-radius: 100%;
     border: none;
-    width: 41px;
-    height: 41px;
+    width: 39px;
+    height: 39px;
     margin-right: 40px;
     background-color: #FAE300;
 }
@@ -127,7 +152,7 @@
 .google {
     border-radius: 100%;
     border: none;
-    width: 41px;
-    height: 41px;
+    width: 39px;
+    height: 39px;
     margin-left: 50px;
 }
