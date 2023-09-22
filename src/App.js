@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
-import Login from "./Login";
-import FindId from "./FindId";
-import FindPwd from "./FindPwd";
-import SignUp from "./SignUp";
-import Kakao from './SocialLogin/Kakao';
-import Naver from './SocialLogin/Naver';
-import Google from './SocialLogin/Google';
-import TodoMain from './TodoMain';
+import Login from "./pages/Login";
+import FindId from "./pages/FindId";
+import FindPwd from "./pages/FindPwd";
+import SignUp from "./pages/SignUp";
+import Kakao from './pages/SocialLogin/Kakao';
+import Naver from './pages/SocialLogin/Naver';
+import Google from './pages/SocialLogin/Google';
+import TodoMain from './pages/TodoMain';
 
 function App() {
   return (
