@@ -7,6 +7,7 @@ import SignUp from "./SignUp";
 import Kakao from './SocialLogin/Kakao';
 import Naver from './SocialLogin/Naver';
 import Google from './SocialLogin/Google';
+import TodoMain from './TodoMain';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/kakao" element={<Kakao />} />
         <Route path="/naver" element={<Naver />} />
         <Route path="/google" element={<Google />} />
+        <Route path="/todomain" element={<TodoMain />} />
       </Routes>
     </Router>
   )

@@ -4,7 +4,7 @@
     height: 70%;
     max-width: 400px;
     padding: 0 30px;
-    margin-top: 10%;
+    margin-top: 7%;
     border-radius: 20px;
     left: 50%;
     transform: translate(-50%, 0);
@@ -27,7 +27,7 @@
 
 /* .inputTitle {
     font-size: 15px;
-    margin-top: 25px;
+    margin-top: 5px;
     color: #0e2d67;
 } */
 
@@ -55,6 +55,7 @@
     color: red;
     font-size: 11px;
     margin-top:10px;
+    margin-left: 5px;
 }
 
 .bottomButton {
@@ -155,4 +156,11 @@
     width: 39px;
     height: 39px;
     margin-left: 50px;
+}
+
+.plus {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    margin-left: 10px;
 }
