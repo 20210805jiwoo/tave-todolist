@@ -58,18 +58,20 @@
         setText('');
     };
 
-    const onCreate = (text) => {
+    //새로운 할 일 항목 생성, todo 상태에 추가
+    const onCreate = (text) => {   //text 변수에 입력한 할 일 포함
         const newTodo = {
-        id: new Date().getTime(),
+        id: new Date().getTime(),   //각 할 일 항목 고유하게 식별
         text,
-        done: false,
+        done: false,    //새로운 할 일은 완료 x false로 초기화
         };
-        setTodos((prevTodos) => [...prevTodos, newTodo]);
+        setTodos((prevTodos) => [...prevTodos, newTodo]);   //todos 배열 복제, newTodo 추가 -> 기존 할 일 목록 변경 않고 새로운 항목 추가
     };
 
-    const onToggle = (id) => {
-        setTodos((prevTodos) =>
-        prevTodos.map((todo) =>
+    //todos 상태 업데이트해 done속성 변경
+    const onToggle = (id) => {  //할 일 항목 완료/미완료 할 때 호출
+        setTodos((prevTodos) => //현재 todos 상태 업데이트
+        prevTodos.map((todo) => //이전의 할 일 목록 순회. map 함수: 배열의 각 요소 -> 새로운 배열 변환
             todo.id === id ? { ...todo, done: !todo.done } : todo
         )
         );
@@ -91,11 +93,11 @@
         <List>
             {todos.map((todo) => (
             <ListItem
-                key={todo.id}
+                key={todo.id}   
                 onClick={() => onToggle(todo.id)}
-                done={todo.done}
+                done={todo.done}    //완료된 항목에 줄 긋기
             >
-                {todo.text}
+                {todo.text} 
             </ListItem>
             ))}
         </List>

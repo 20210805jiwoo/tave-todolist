@@ -1,3 +1,4 @@
+//Main 페이지
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
@@ -64,9 +65,6 @@ export default function Login() {
                     onChange={handleEmailChange}    //이메일 변경 시 핸들러 호출
                     />
                 </div>
-                {/* <div className='errorMessage'>
-                    올바른 이메일을 입력하세요.
-                </div> */}
                 {showEmailError && (
                     <div className='errorMessage'>
                         올바른 이메일을 입력하세요.
