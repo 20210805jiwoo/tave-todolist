@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {BsPersonPlusFill} from 'react-icons/bs';
 import { auth, db } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; 
 
 function SignUp() {
@@ -17,6 +17,7 @@ function SignUp() {
 
     const navigate = useNavigate();
 
+    //사용자 입력에 대한 유효성 검사 함수들
     const handleNameChange = (e) => {
         const inputName = e.target.value;
         setName(inputName);
@@ -54,18 +55,20 @@ function SignUp() {
             } else {
                 // Firebase Auth에 사용자 등록
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
+                const user = userCredential.user;   //결과로 userCredential 객체 반환
 
                 // Firestore에 사용자 정보 저장
-                const userDocRef = doc(db, 'users', user.uid);
-                await setDoc(userDocRef, {
+                const userDocRef = doc(db, 'users', user.uid);  //user.uid로 해당 사용자의 문서 참조 생성
+                await setDoc(userDocRef, {  //setDoc 함수: 사용자의 이름, 이메일 문서에 저장
                     name: name,
                     email: email,
                 });
 
-                console.log('User registered:', user);
-                // 여기서 추가적인 작업을 수행할 수 있습니다.
-                alert('가입이 완료되었습니다.');
+                console.log('User registered:', user);  //콘솔에 사용자 정보 기록
+
+                // 여기서 추가적인 작업을 수행
+
+                alert('가입이 완료되었습니다.');    //구현 안되고 있음,,
                 navigate('/');
             }
         } catch (error) {
