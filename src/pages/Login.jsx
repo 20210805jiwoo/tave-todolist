@@ -14,10 +14,18 @@ import TodoMain from './TodoMain';
 export default function Login() {
     const [userData, setUserData] = useState(null);
     const navigate = useNavigate();
+    const [name, setName] = useState('');
     const [email, setEmail] = useState();
     const [pwd, setPwd] = useState();
+    const [nameError, setNameError] = useState('');
     const [showEmailError, setShowEmailError] = useState(false); // 초기값을 false로 설정
     const [showPwdError, setShowPwdError] = useState(false);
+
+    const handleNameChange = (e) => {
+        const inputName = e.target.value;
+        setName(inputName);
+        setNameError(inputName.length < 2 ? '이름은 2자 이상이어야 합니다.' : '');
+    };
 
     const handleEmailChange = (e) => {
         const inputEmail = e.target.value;
@@ -39,62 +47,53 @@ export default function Login() {
         setShowPwdError(!isValid);
     };
 
-    // const handleLogin = () => {
-    //     if (!email && !pwd) {
-    //         alert("이메일 주소와 비밀번호는 필수 항목입니다.");
-    //     } else if (!pwd) {
-    //         alert("비밀번호는 필수 항목입니다.");
-    //     } else if (!email) {
-    //         alert("이메일 주소는 필수 항목입니다.");
-    //     } else if (showEmailError || showPwdError) {
-    //         alert("올바른 이메일과 비밀번호를 입력하세요.");
-    //     } else {
-    //         navigate("/todomain");
-    //     }
-    // }
-
     const handleLogin = async () => {
-        if (!email || !pwd) {
-            alert("이메일 주소와 비밀번호는 필수 항목입니다.");
+        if (!name || !email || !pwd) {
+            alert("이름, 이메일 주소, 비밀번호는 필수 항목입니다.");
             return;
         }
-    
-        if (showEmailError || showPwdError) {
-            alert("올바른 이메일과 비밀번호를 입력하세요.");
-            return;
-        }
-    
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, pwd);
-            const user = userCredential.user;
-    
-            // Firestore에서 사용자 정보 가져오기
-            const userDocRef = doc(db, 'users', user.uid);
-            const userDoc = await getDoc(userDocRef);
-    
-            if (!userDoc.exists()) {
-                // 사용자가 Firestore에 등록되지 않은 경우
-                console.error("가입된 회원이 아닙니다.");
-                alert("가입된 회원이 아닙니다.");
-                return;
-            }
-    
-            setUserData(user);
-            navigate("/todomain", { state: { user: user } });
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-    
-            if (errorCode === 'auth/user-not-found') {
-                // 사용자가 인증 데이터베이스에 등록되지 않은 경우
-                // alert("가입된 회원이 아닙니다.");
-                console.error('Login error:', errorCode, errorMessage);
-            } else {
-                console.error('Login error:', errorCode, errorMessage);
-                alert("가입된 회원이 아닙니다.");
-            }
-        }
+        console.log('Name:', name);
+        navigate("/todomain", { state: { user: { name: name } } });
     };
+    
+    // const handleLogin = async () => {
+    //     if (!name || !email || !pwd) {
+    //         alert("이름, 이메일 주소, 비밀번호는 필수 항목입니다.");
+    //         return;
+    //     } else {
+    //         navigate("/todomain", { state: { user: user } });
+    //     }
+    
+    
+        // try {
+        //     const userCredential = await signInWithEmailAndPassword(auth, email, pwd);
+        //     const user = userCredential.user;
+    
+        //     // Firestore에서 사용자 정보 가져오기
+        //     const userDocRef = doc(db, 'users', user.uid);
+        //     const userDoc = await getDoc(userDocRef);
+    
+            // if (user && userDoc.exists()) {
+            //     setUserData(user);
+            //     navigate("/todomain", { state: { user: user } });
+            // } else {
+            //     console.error("가입된 회원이 아닙니다.");
+            //     alert("가입된 회원이 아닙니다.");
+            // }
+        // } catch (error) {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+    
+        //     if (errorCode === 'auth/user-not-found') {
+        //         // 사용자가 인증 데이터베이스에 등록되지 않은 경우
+        //         // alert("가입된 회원이 아닙니다.");
+        //         console.error('Login error:', errorCode, errorMessage);
+        //     } else {
+        //         console.error('Login error:', errorCode, errorMessage);
+        //         alert("가입된 회원이 아닙니다.");
+        //     }
+        // }
+    //};
     
     
     
@@ -113,7 +112,7 @@ export default function Login() {
                 console.log(err);
             });
         }
-
+    
 
     return (
         <div className="page">
@@ -123,7 +122,19 @@ export default function Login() {
             </div>
 
             <div className='content'>
-                {/* <div className='inputTitle'>email 주소</div> */}
+                <div className='inputWrap'>
+                    <input 
+                    className='input'
+                    placeholder='이름 입력'
+                    value={name}
+                    onChange={handleNameChange}
+                    />
+                </div>
+                {nameError && (
+                    <div className='errorMessage'>
+                        {nameError}
+                    </div>
+                )}
                 <div className='inputWrap'>
                     <input 
                     className='input'
@@ -138,7 +149,6 @@ export default function Login() {
                     </div>
                 )}
 
-                {/* <div className='inputTitle'>비밀번호</div> */}
                 <div className='inputWrap'>
                     <input 
                     className='input'
