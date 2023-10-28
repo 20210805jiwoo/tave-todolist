@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { useNavigate} from 'react-router-dom';
 import '../index.css';
 import {FcGoogle} from 'react-icons/fc';
-import {SiNaver} from 'react-icons/si';
-import {RiKakaoTalkFill} from 'react-icons/ri';
 import {PiNotepad} from 'react-icons/pi';
 import {auth, db} from "../firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup,  signInWithEmailAndPassword } from 'firebase/auth';
@@ -101,9 +99,13 @@ export default function Login() {
         const provider = new GoogleAuthProvider(); // provider를 구글로 설정
         signInWithPopup(auth, provider) // popup을 이용한 signup
             .then((data) => {
-                setUserData(data.user); // user data 설정
-                console.log(data.user); // console로 들어온 데이터 표시
-                navigate("/todomain", { state: { user: data.user } });
+                // setUserData(data.user); // user data 설정
+                // console.log(data.user); // console로 들어온 데이터 표시
+                // navigate("/todomain", { state: { user: data.user } });
+                const user = data.user;
+                setUserData(user);
+                console.log(user);
+                navigate("/todomain", {state: {user: {name: user.displayName}}});
             })
             // .then((data) => {
             //     navigate({ state: { user: data.user }}, "/todomain");  //성공적인 로그인 후 todomain 페이지로 이동
@@ -180,12 +182,12 @@ export default function Login() {
                 <div className='hr-sen'>SNS 계정으로 로그인</div>
 
                 <div className='social-login'>
-                    <button onClick={()=>{navigate("/kakao")}} className='kakao'>
+                    {/* <button onClick={()=>{navigate("/kakao")}} className='kakao'>
                     <RiKakaoTalkFill className='detail'/>
                     </button>
                     <button onClick={()=>{navigate("/naver")}} className='naver'>
                     <SiNaver className='naverdetail' />
-                    </button>
+                    </button> */}
                     <button onClick={handleGoogleLogin} className='google'>
                     <FcGoogle className='detail'/>
                     </button>

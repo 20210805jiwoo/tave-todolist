@@ -4,7 +4,7 @@ import {MdRecordVoiceOver} from 'react-icons/md';
 import {AiOutlineCloseSquare} from 'react-icons/ai';
 import {RiDeleteBinLine} from 'react-icons/ri';
 import {BiEditAlt} from 'react-icons/bi';
-
+import {BiCheckCircle} from 'react-icons/bi';
 
 // 스타일드 컴포넌트 정의
 const Container = styled.div`
@@ -60,7 +60,7 @@ const ListItem = styled.li`
     border-bottom: 1px solid #ccc;
     cursor: pointer;
     text-decoration: ${(props) => (props.done ? 'line-through' : 'none')};
-    color: ${(props) => (props.done ? 'red' : 'inherit')};
+    color: ${(props) => (props.done ? 'gray' : 'inherit')};
 `;
 
 const TodoNumber = styled.span`
@@ -126,7 +126,21 @@ const EditInput = styled.input`
     margin-right: 5px;
     border: none;
     border-radius: 20px;
-`
+`;
+
+const CompleteButton = styled.button`
+    margin-left: 5px;
+    margin-right: 0;
+    color: ${(props) => (props.done ? 'gray' : 'blue')};
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 17px;
+
+    svg {
+        fill: ${(props) => (props.done ? 'gray' : 'blue')};
+    }
+`;
 
 function TodoMain({ location }) {
     const user = location?.state?.user;
@@ -157,6 +171,14 @@ function TodoMain({ location }) {
         done: false,    //새로운 할 일은 완료 x false로 초기화
         };
         setTodos((prevTodos) => [...prevTodos, newTodo]);   //todos 배열 복제, newTodo 추가 -> 기존 할 일 목록 변경 않고 새로운 항목 추가
+    };
+
+    const onToggleComplete = (id) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todo.id === id ? { ...todo, done: !todo.done } : todo
+            )
+        );
     };
 
     //todos 상태 업데이트해 done속성 변경
@@ -201,15 +223,11 @@ function TodoMain({ location }) {
     };
 
     
-
-
-
-
     return (
     <Container>
-        <div className='name'>
-            {user ? `${user.name}'s todolist` : 'Todolist'}
-        </div>
+        {/* <div className='name'>
+            {user ? `${user.displayName}'s todolist` : 'Todolist'}
+        </div> */}
         <FormContainer onSubmit={onSubmit}>
         <Input
             className="input"
@@ -223,10 +241,10 @@ function TodoMain({ location }) {
         </Button>
         </FormContainer>
         <List>
-                {todos.map((todo, index) => (
+                {todos.map((todo, index) => (   //할 일 항목 매핑 (todos 배열 순회)
                     <ListItem key={todo.id} done={todo.done}>
-                        <TodoNumber>{index + 1}.</TodoNumber>
-                        {editTodoId === todo.id ? (
+                        <TodoNumber>{index + 1}.</TodoNumber>   
+                        {editTodoId === todo.id ? ( //수정 모드 여부에 따른 UI 분기
                             <>
                                 <EditInput
                                     type="text"
@@ -245,6 +263,9 @@ function TodoMain({ location }) {
                                 <DeleteButton onClick={() => onDelete(todo.id)}>
                                     <RiDeleteBinLine />
                                 </DeleteButton>
+                                <CompleteButton done={todo.done} onClick={() => onToggleComplete(todo.id)}>
+                                    <BiCheckCircle />
+                                </CompleteButton>
                             </>
                         )}
                     </ListItem>
